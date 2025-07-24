@@ -21,61 +21,46 @@ const CountryList = () => {
 
   const filtered = countries.filter(c => c.country.toLowerCase().includes(search.toLowerCase()));
 
+  // Pagination logic
   const indexOfLast = currentPage * countriesPerPage;
   const indexOfFirst = indexOfLast - countriesPerPage;
   const currentCountries = filtered.slice(indexOfFirst, indexOfLast);
   const totalPages = Math.ceil(filtered.length / countriesPerPage);
 
+  const handlePageChange = (page) => {
+    if (page >= 1 && page <= totalPages) {
+      setCurrentPage(page);
+    }
+  };
+
   return (
-    <div className="max-w-6xl mx-auto px-4 py-8">
-      <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">
-        🌐 COVID Stats by Country
-      </h2>
-
-      <input
-        type="text"
-        placeholder="Search countries..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        className="w-full p-3 mb-8 border border-gray-300 rounded-xl shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-      />
-
-      <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {currentCountries.map((c) => (
-          <Link
-            to={`/country/${c.countryInfo.iso2}`}
-            key={c.country}
-            className="flex items-center gap-4 bg-white rounded-xl shadow p-4 hover:shadow-lg hover:scale-[1.02] transition-transform"
-          >
-            
-            <img
-              src={c.countryInfo.flag}
-              alt={c.country}
-              className="w-20 h-12 object-cover rounded border"
-            />
-            <div className="flex flex-col">
-              <p className="text-lg font-semibold text-gray-800">{c.country}</p>
-              <p className="text-sm text-gray-600">Cases: {c.cases.toLocaleString()}</p>
-            </div>
-      
-          </Link>
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-10 space-x-2">
-        {Array.from({ length: totalPages }, (_, i) => (
-          <button
-            key={i}
-            onClick={() => setCurrentPage(i + 1)}
-            className={`px-4 py-2 rounded-full text-sm font-medium transition ${
-              currentPage === i + 1
-                ? 'bg-blue-500 text-white'
-                : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-            }`}
-          >
-            {i + 1}
-          </button>
-        ))}
+    <div>
+      <h2>Country-wise COVID Stats</h2>
+      <input placeholder="Search country..." value={search} onChange={e => setSearch(e.target.value)} />
+      <table border={1} cellPadding={5} style={{ marginTop: '10px' }}>
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Cases</th>
+            <th>Deaths</th>
+            <th>Recovered</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentCountries.map(country => (
+            <tr key={country.country}>
+              <td><Link to={`/country/${encodeURIComponent(country.country)}`}>{country.country}</Link></td>
+              <td>{country.cases}</td>
+              <td>{country.deaths}</td>
+              <td>{country.recovered}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div style={{ marginTop: '10px' }}>
+        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>Prev</button>
+        <span style={{ margin: '0 10px' }}>Page {currentPage} of {totalPages}</span>
+        <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>Next</button>
       </div>
     </div>
   );

@@ -3,12 +3,8 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="bg-white shadow-md px-6 py-4 flex justify-center gap-6 border-b border-gray-200">
-      <Link to="/" className="text-gray-800 hover:text-blue-600 font-medium">Home</Link>
-      <Link to="/global" className="text-gray-800 hover:text-blue-600 font-medium">Global Overview</Link>
-      <Link to="/countries" className="text-gray-800 hover:text-blue-600 font-medium">Countries</Link>
-      <Link to="/charts" className="text-gray-800 hover:text-blue-600 font-medium">Charts</Link>
-      <Link to="/about" className="text-gray-800 hover:text-blue-600 font-medium">About</Link>
+    <nav style={{ padding: '10px', borderBottom: '1px solid #ccc' }}>
+      <Link to="/">Home</Link> | <Link to="/global">Global Overview</Link> | <Link to="/countries">Countries</Link> | <Link to="/charts">Charts</Link> | <Link to="/about">About</Link>
     </nav>
   );
 };
