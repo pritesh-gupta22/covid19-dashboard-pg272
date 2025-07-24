@@ -21,11 +21,11 @@ const Charts = () => {
       .then(res => {
         const top10 = res.data.slice(0, 10);
         setChartData({
-          labels: top10.map((c: any) => c.country),
+          labels: top10.map((c) => c.country),
           datasets: [
             {
               label: 'Cases',
-              data: top10.map((c: any) => c.cases),
+              data: top10.map((c) => c.cases),
               backgroundColor: 'rgba(75,192,192,0.6)',
             },
           ]

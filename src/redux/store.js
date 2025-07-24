@@ -1,6 +1,11 @@
-import { createStore } from 'redux';
-import rootReducer from './reducers';
+// redux/store.js
+import { configureStore } from '@reduxjs/toolkit';
+import countriesReducer from './reducers/countriesReducer';
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: {
+    countries: countriesReducer,
+  },
+});
 
 export default store;

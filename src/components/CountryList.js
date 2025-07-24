@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCountries } from '../redux/actions';
+import { setCountries } from '../redux/reducers/countriesReducer';
 import { Link } from 'react-router-dom';
 
 const CountryList = () => {
@@ -37,7 +37,7 @@ const CountryList = () => {
     <div>
       <h2>Country-wise COVID Stats</h2>
       <input placeholder="Search country..." value={search} onChange={e => setSearch(e.target.value)} />
-      <table border={1} cellPadding={5} style={{ marginTop: '10px' }}>
+      <table className="country-table" border={1} cellPadding={5} style={{ marginTop: '10px' }}>
         <thead>
           <tr>
             <th>Country</th>
