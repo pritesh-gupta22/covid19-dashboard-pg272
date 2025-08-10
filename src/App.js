@@ -6,6 +6,7 @@ import CountryList from './components/CountryList';
 import About from './components/About';
 import CountryDetail from './components/CountryDetail';
 import ChartPage from './components/ChartPage';
+import Charts from './components/Charts';
 import Navbar from './components/Navbar';
 
 const App = () => {
@@ -17,7 +18,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
             <Route path="/global" element={<GlobalStats />} />
             <Route path="/countries" element={<CountryList />} />
-            <Route path="/charts" element={<ChartPage />} />
+            <Route path="/trend" element={<ChartPage />} />
+            <Route path="/charts" element={<Charts />} />
             <Route path="/about" element={<About />} />
             <Route path="/country/:name" element={<CountryDetail />} />
         </Routes>

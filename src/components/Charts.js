@@ -14,7 +14,11 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const Charts = () => {
-  const [chartData, setChartData] = useState<any>({});
+  const [chartData, setChartData] = useState({
+  labels: [],
+  datasets: []
+});
+
 
   useEffect(() => {
     axios.get('https://disease.sh/v3/covid-19/countries?sort=cases')
@@ -34,11 +38,15 @@ const Charts = () => {
   }, []);
 
   return (
-    <div>
-      <h2>Top 10 Countries by Cases</h2>
+  <div>
+    <h2>Top 10 Countries by Cases</h2>
+    {chartData.labels.length > 0 ? (
       <Bar data={chartData} />
-    </div>
-  );
+    ) : (
+      <p>Loading chart...</p>
+    )}
+  </div>
+);
 };
 
 export default Charts;
